@@ -306,7 +306,7 @@ const createTaskEditTemplate = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
-  const date = isDateShowing ? `${dueDate.getDate()} ${_const_js__WEBPACK_IMPORTED_MODULE_0__["MonthNames"][dueDate.getMonth()]}` : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${_const_js__WEBPACK_IMPORTED_MODULE_0__["MONTH_NAMES"][dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? Object(_utils_js__WEBPACK_IMPORTED_MODULE_1__["formatTime"])(dueDate) : ``;
 
   const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
@@ -314,8 +314,8 @@ const createTaskEditTemplate = (task) => {
   const deadlineClass = isExpired ? `card--deadline` : ``;
 
   const tagsMarkup = createHashtags(tags);
-  const colorsMarkup = createColorsMarkup(_const_js__WEBPACK_IMPORTED_MODULE_0__["Colors"], color);
-  const repeatingDaysMarkup = createRepeatingDaysMarkup(_const_js__WEBPACK_IMPORTED_MODULE_0__["Days"], repeatingDays);
+  const colorsMarkup = createColorsMarkup(_const_js__WEBPACK_IMPORTED_MODULE_0__["COLORS"], color);
+  const repeatingDaysMarkup = createRepeatingDaysMarkup(_const_js__WEBPACK_IMPORTED_MODULE_0__["DAYS"], repeatingDays);
 
   const dateShowing = `<fieldset class="card__date-deadline">
                         <label class="card__input-deadline-wrap">
@@ -444,7 +444,7 @@ const createTaskTemplate = (task) => {
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
 
-  const date = isDateShowing ? `${dueDate.getDate()} ${_const_js__WEBPACK_IMPORTED_MODULE_0__["MonthNames"][dueDate.getMonth()]}` : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${_const_js__WEBPACK_IMPORTED_MODULE_0__["MONTH_NAMES"][dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? Object(_utils_js__WEBPACK_IMPORTED_MODULE_1__["formatTime"])(dueDate) : ``;
 
   const hashtags = createHashtagsMarkup(Array.from(tags));
@@ -507,19 +507,19 @@ const createTaskTemplate = (task) => {
 /*!**********************!*\
   !*** ./src/const.js ***!
   \**********************/
-/*! exports provided: Colors, Days, MonthNames */
+/*! exports provided: COLORS, DAYS, MONTH_NAMES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Colors", function() { return Colors; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Days", function() { return Days; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MonthNames", function() { return MonthNames; });
-const Colors = [`black`, `yellow`, `blue`, `green`, `pink`];
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COLORS", function() { return COLORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DAYS", function() { return DAYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MONTH_NAMES", function() { return MONTH_NAMES; });
+const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
 
-const Days = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
+const DAYS = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
 
-const MonthNames = [
+const MONTH_NAMES = [
   `January`,
   `February`,
   `March`,
@@ -548,46 +548,57 @@ const MonthNames = [
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_board_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/board.js */ "./src/components/board.js");
 /* harmony import */ var _components_filter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/filter.js */ "./src/components/filter.js");
-/* harmony import */ var _components_site_menu_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/site-menu.js */ "./src/components/site-menu.js");
-/* harmony import */ var _components_task_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/task.js */ "./src/components/task.js");
-/* harmony import */ var _components_task_edit_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/task-edit.js */ "./src/components/task-edit.js");
-/* harmony import */ var _components_load_more_button_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/load-more-button.js */ "./src/components/load-more-button.js");
+/* harmony import */ var _components_load_more_button_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/load-more-button.js */ "./src/components/load-more-button.js");
+/* harmony import */ var _components_task_edit_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/task-edit.js */ "./src/components/task-edit.js");
+/* harmony import */ var _components_task_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/task.js */ "./src/components/task.js");
+/* harmony import */ var _components_site_menu_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/site-menu.js */ "./src/components/site-menu.js");
 /* harmony import */ var _mock_task_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mock/task.js */ "./src/mock/task.js");
 /* harmony import */ var _mock_filter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mock/filter.js */ "./src/mock/filter.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+
+
+
+
+
+
+
+
+
+
 const TASK_COUNT = 22;
-
-
-
-
-
-
-
-
-
-
-
-
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
+const SHOWING_TASKS_COUNT_ON_START = 8;
+const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
-
-render(siteHeaderElement, Object(_components_site_menu_js__WEBPACK_IMPORTED_MODULE_2__["createSiteMenuTemplate"])(), `beforeend`);
+Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(siteHeaderElement, Object(_components_site_menu_js__WEBPACK_IMPORTED_MODULE_5__["createSiteMenuTemplate"])(), `beforeend`);
 
 const filters = Object(_mock_filter_js__WEBPACK_IMPORTED_MODULE_7__["generateFilters"])();
-render(siteMainElement, Object(_components_filter_js__WEBPACK_IMPORTED_MODULE_1__["createFilterTemplate"])(filters), `beforeend`);
-render(siteMainElement, Object(_components_board_js__WEBPACK_IMPORTED_MODULE_0__["createBoardTemplate"])(), `beforeend`);
+Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(siteMainElement, Object(_components_filter_js__WEBPACK_IMPORTED_MODULE_1__["createFilterTemplate"])(filters), `beforeend`);
+Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(siteMainElement, Object(_components_board_js__WEBPACK_IMPORTED_MODULE_0__["createBoardTemplate"])(), `beforeend`);
 
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 const tasks = Object(_mock_task_js__WEBPACK_IMPORTED_MODULE_6__["generateTasks"])(TASK_COUNT);
+Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(taskListElement, Object(_components_task_edit_js__WEBPACK_IMPORTED_MODULE_3__["createTaskEditTemplate"])(tasks[0]), `beforeend`);
 
-render(taskListElement, Object(_components_task_edit_js__WEBPACK_IMPORTED_MODULE_4__["createTaskEditTemplate"])(tasks[0]), `beforeend`);
-tasks.slice(1).forEach((task) => render(taskListElement, Object(_components_task_js__WEBPACK_IMPORTED_MODULE_3__["createTaskTemplate"])(task), `beforeend`));
+let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
+tasks.slice(1, showingTasksCount).forEach((task) => Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(taskListElement, Object(_components_task_js__WEBPACK_IMPORTED_MODULE_4__["createTaskTemplate"])(task), `beforeend`));
 
 const boardElement = siteMainElement.querySelector(`.board`);
-render(boardElement, Object(_components_load_more_button_js__WEBPACK_IMPORTED_MODULE_5__["createLoadMoreButtonTemplate"])(), `beforeend`);
+Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(boardElement, Object(_components_load_more_button_js__WEBPACK_IMPORTED_MODULE_2__["createLoadMoreButtonTemplate"])(), `beforeend`);
+
+const loadMoreButton = boardElement.querySelector(`.load-more`);
+loadMoreButton.addEventListener(`click`, () => {
+  const prevTasksCount = showingTasksCount;
+  showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
+
+  tasks.slice(prevTasksCount, showingTasksCount)
+    .forEach((task) => Object(_utils_js__WEBPACK_IMPORTED_MODULE_8__["render"])(taskListElement, Object(_components_task_js__WEBPACK_IMPORTED_MODULE_4__["createTaskTemplate"])(task), `beforeend`));
+
+  if (showingTasksCount >= tasks.length) {
+    loadMoreButton.remove();
+  }
+});
 
 
 /***/ }),
@@ -659,13 +670,13 @@ const Tags = [
 ];
 
 const getRandomArrayItem = (array) => {
-  const randomIndex = getRandomIntegerNumber(0, array.length);
+  const randomIndex = getRandomIntegerNumber(0, array.length - 1);
 
   return array[randomIndex];
 };
 
 const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor(max * Math.random());
+  return min + Math.floor((max - min) * Math.random());
 };
 
 const getRandomDate = () => {
@@ -698,7 +709,7 @@ const generateTask = () => {
     dueDate,
     repeatingDays: dueDate ? DefaultRepeatingDays : generateRepeatingDays(),
     tags: new Set(generateTags(Tags)),
-    color: getRandomArrayItem(_const_js__WEBPACK_IMPORTED_MODULE_0__["Colors"]),
+    color: getRandomArrayItem(_const_js__WEBPACK_IMPORTED_MODULE_0__["COLORS"]),
     isFavorite: Math.random() > 0.5,
     isArchive: Math.random() > 0.5,
   };
@@ -719,23 +730,47 @@ const generateTasks = (count) => {
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/*! exports provided: formatTime */
+/*! exports provided: RenderPosition, formatTime, createElement, render */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RenderPosition", function() { return RenderPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatTime", function() { return formatTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return createElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
 const castTimeFormat = (value) => {
   return value < 10 ? `0${value}` : String(value);
 };
-
 const formatTime = (date) => {
   const hours = castTimeFormat(date.getHours() % 12);
   const minutes = castTimeFormat(date.getMinutes());
-
   const interval = date.getHours() > 11 ? `pm` : `am`;
 
   return `${hours}:${minutes} ${interval}`;
+};
+
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+const render = (container, element, place) => {
+  switch (place) {
+    case RenderPosition.AFTERBEGIN:
+      container.prepend(element);
+      break;
+    case RenderPosition.BEFOREEND:
+      container.append(element);
+      break;
+  }
 };
 
 
