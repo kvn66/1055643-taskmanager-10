@@ -13,11 +13,7 @@ const createColorsMarkup = (colors, currentColor) => {
           value="${color}"
           ${currentColor === color ? `checked` : ``}
         />
-        <label
-          for="color-${color}-4"
-          class="card__color card__color--${color}"
-          >${color}</label
-        >`
+        <label for="color-${color}-4" class="card__color card__color--${color}">${color}</label>`
       );
     })
     .join(`\n`);
@@ -36,9 +32,7 @@ const createRepeatingDaysMarkup = (days, repeatingDays) => {
           value="${day}"
           ${isChecked ? `checked` : ``}
         />
-        <label class="card__repeat-day" for="repeat-${day}-4"
-          >${day}</label
-        >`
+        <label class="card__repeat-day" for="repeat-${day}-4">${day}</label>`
       );
     })
     .join(`\n`);
